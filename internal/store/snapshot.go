@@ -15,6 +15,6 @@ func CloneCarrierSnapshot(s model.PlantSnapshot) CarrierSnapshotView {
 		Carrier:     s.Carrier,
 		Revision: s.Revision,
 	}
-	out.Alarms = s.Alarms[:len(s.Alarms):len(s.Alarms)]
+	out.Alarms = append([]model.AlarmEvent(nil), s.Alarms...)
 	return out
 }
