@@ -39,7 +39,7 @@ func NewRinseWindow(clk ProcessClock) *RinseWindow {
 }
 
 func (p *RinseWindow) Ready(startedAt time.Time) bool {
-	return time.Since(startedAt) >= model.RinseWindow
+	return p.window.Satisfied(p.clk, startedAt)
 }
 
 func (p *RinseWindow) Require(startedAt time.Time) error {
