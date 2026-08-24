@@ -33,7 +33,7 @@ func (a *App) DrainAfterShutdown(ctx context.Context, openingPct float64) error 
 		return fmt.Errorf("plant not shut down")
 	}
 	if openingPct >= maxDrainOpeningPct {
-		return fmt.Errorf("unknown fault")
+		return fmt.Errorf("drain: %w", model.ErrDrainLimit)
 	}
 	return nil
 }
