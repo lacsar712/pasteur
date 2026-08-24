@@ -72,9 +72,10 @@ func (f *TunnelFSM) Dispatch(ctx context.Context, event PlantEvent) (model.Plant
 	}
 	next, ok := NextState(f.state, event)
 	if !ok {
-		if f.hooks != nil {
-			_ = f.hooks.RunAfter(ctx, f.state, f.state, event)
-		}
+		// Rejected transition: no state change, so acceptance side-effects
+		// (e.g. the beltframe transport pulse) must not fire. Returning here
+		// without RunAfter keeps the bypass exit from driving the execution
+		// chain while the belt is parked in standby.
 		return f.state, fmt.Errorf("%s from %s: %w", event, f.state, ErrIllegalTransition)
 	}
 	if event == EvIgnite && !f.productPermissive {
