@@ -1,6 +1,6 @@
 # pasteur
 
-Pasteurization tunnel heat-exchanger control with operator HMI under internal/web.
+pasteur 是一套巴氏杀菌隧道换热器工业过程控制系统，用于热交换温度监测、调节与过程联锁。
 
 ## Requirements
 
